@@ -1,0 +1,105 @@
+<meta charset="utf-8">
+<title>Listr</title>
+<script src="stuff.js"></script>
+<script src="presets.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<div class="w3-container w3-deep-purple w3-card-4">
+    <h1>listr.</h1>
+</div>
+<div class="w3-container">
+    <div class="w3-card w3-leftbar w3-border-deep-purple w3-panel">
+        <p>Welcome to listr, the website for all your listing needs. Just choose a few items, and we will be ready to
+            sort out anything you need. Keep in mind, on this site, you choose the items, you choose the topic, and you
+            do the sorting. Get ready… sort!</p>
+    </div>
+    <div class="w3-card w3-margin-bottom" id="input" style="display: undefined">
+        <div class="w3-container w3-deep-purple">
+            <p>Choose a preexisting option…</p>
+        </div>
+        <div class="w3-row">
+            <button class="w3-hover-green w3-button w3-col s2 w3-blue w3-center"
+                onclick="set_input_text('foods')">foods</button>
+            <button class="w3-hover-green w3-button w3-col s2 w3-blue w3-center"
+                onclick="set_input_text('emoji')">emoji</button>
+            <button class="w3-hover-green w3-button w3-col s2 w3-blue w3-center"
+                onclick="set_input_text('mobs')">minecraft mobs</button>
+            <button class="w3-hover-green w3-button w3-col s1 w3-blue w3-center"
+                onclick="set_input_text('sus')">sus</button>
+            <button class="w3-hover-green w3-button w3-col s2 w3-blue w3-center"
+                onclick="set_input_text('celebrities')">celebrities</button>
+            <button class="w3-hover-green w3-button w3-col s2 w3-blue w3-center"
+                onclick="set_input_text('games')">games</button>
+            <button class="w3-hover-green w3-button w3-col s1 w3-red w3-center"
+                onclick="set_input_text('clear')">clear</button>
+        </div>
+        <div class="w3-container w3-deep-purple">
+            <p>…or customize your list by entering comma seperated values.</p>
+        </div>
+        <div class="w3-container">
+            <textarea id="csv_input" class="w3-margin-bottom w3-margin-top" style="width: 100%; resize: vertical"
+                cols="30" rows="10" oninput="update_estimates()">apple, orange, banana</textarea>
+        </div>
+        <div class="w3-bar">
+            <button class="w3-bar-item w3-button w3-deep-purple w3-hover-green" style="width:50%" onclick="main()">Sort
+                All (Slower ~<span id="prediction all">3</span> Choices)</button>
+            <button class="w3-bar-item w3-button w3-deep-purple w3-hover-green" style="width:50%"
+                onclick="main(true)">Sort Top
+                Five (Faster ~<span id="prediction five">3</span> Choices)</button>
+        </div>
+    </div>
+    <div class="w3-card w3-margin-bottom" id="sorting" style="display: none">
+        <div class="w3-container w3-leftbar w3-border-deep-purple">
+            <p>Choose the one that you think should be ranked higher! You are currently at <span id="percent"></span>.
+            </p>
+        </div>
+        <!--
+        <div class="w3-cell" style="width:50%">
+            <div style="height: calc(50vw - 50px); text-align: center; vertical-align:middle">
+                <img style="max-height:calc(50vw - 50px); max-width:100%" id="image_1"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Satterfield_cartoon_about_floods_of_political_scandals.jpg/1920px-Satterfield_cartoon_about_floods_of_political_scandals.jpg">
+            </div>
+            <div class="w3-container w3-center w3-deep-purple" style="height:50px; vertical-align: middle;">
+                <p id="image_1_tag">The Floods in the East</p>
+            </div>
+        </div>
+        <div class="w3-cell" style="width:50%">
+            <div style="height: calc(50vw - 50px); text-align: center; vertical-align:middle">
+                <img style="max-height:calc(50vw - 50px); max-width:100%" id="image_2"
+                    src="https://media.cnn.com/api/v1/images/stellar/prod/220308212405-alienware-curved-monitor-forza.jpg?c=16x9&q=h_540,w_960,c_fill">
+            </div>
+            <div class="w3-container w3-center w3-deep-purple" style="height:50px; vertical-align: middle;">
+                <p id="image_2_tag">Katy Perry</p>
+            </div>
+        </div>
+    -->
+        <div class="w3-cell-row">
+            <div class="w3-cell w3-container w3-red w3-center w3-hover-green" style="width: 50%" id="tag_1_box">
+                <p id="tag_1">Katy Perry</p>
+            </div>
+            <div class="w3-cell w3-container w3-blue w3-center w3-hover-green" style="width: 50%" id="tag_2_box">
+                <p id="tag_2">Taylor Swift</p>
+            </div>
+        </div>
+    </div>
+    <div class="w3-card w3-margin-bottom" id="ranks" style="display: none">
+        <div class="w3-container w3-deep-purple">
+            <p>The results are in! Here are the ranks:</p>
+        </div>
+        <div class="w3-container">
+            <p id="output">1. Katy Perry<br>
+                2. Taylor Swift
+            </p>
+        </div>
+    </div>
+    <div class="w3-card w3-leftbar w3-border-deep-purple w3-margin-bottom" id="sharecard" style="display: none">
+        <div class="w3-container">
+            <p>
+                Thank you for using my website! If you want to share your results, just copy the URL in your browser or
+                use
+                the share feature in your browser! If you
+                want to go again with a different list, press the button below!
+            </p>
+        </div>
+        <a class="w3-button w3-blue w3-hover-green" style="width:100%" href="" id="homeurl">Go Again</a>
+    </div>
